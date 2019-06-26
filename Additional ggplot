@@ -18,3 +18,4 @@ impdata1
 cordata1<-cor(impdata1)
 #show all the correlation coeffiecents
 cordata1
+ggplot(data, aes(x = Weight, y = Gender)) + geom_point()
