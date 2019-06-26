@@ -1,0 +1,45 @@
+library('NHANES')
+library('mice')
+library('ggplot2')
+library('reshape2')
+
+data <- NHANES[c('Weight','HHIncome','SleepHrsNight','PhysActive','Gender')]
+data
+imp<-mice(data,m=10)
+impdata1<-complete(imp)
+#I used this code on each non-numeric variable to convert to numeric: 
+impdata1[,'Gender']<-as.numeric(impdata1[,'Gender'])
+impdata1[, 'PhysActive']<-as.numeric(impdata1[, 'PhysActive'])
+impdata1[, 'HHIncome']<-as.numeric(impdata1[, 'HHIncome'])
+impdata1
+#I used this code after each conversion to see that it changed to numeric: 
+#impdata1[1:5,]
+#I used this to produce the correlation of the data: 
+cordata1<-cor(impdata1)
+#show all the correlation coeffiecents
+cordata1
+ggplot(data=melt(cordata1), aes(x=Var1, y=Var2, fill=value)) + labs(title = "Group Project", subtitle = "Team Members Tony Cohen, Monique Boyd, and Mike Goodman", 
+                                                                    x = "Variables X", y = "Varaibles Y" ) +
+  geom_tile(color = "white")+
+  scale_fill_gradient2(low = "blue", high = "red", mid = "white", 
+                       midpoint = 0, limit = c(-1,1), space = "Lab", 
+                       name="Correlation") +
+  theme_minimal()+ 
+  theme(axis.text.x = element_text(angle = 45, vjust = 1, 
+                                   size = 9, hjust = 1))+
+  coord_fixed()
+
+#using corrplot 
+install.packages("corrplot")
+require(corrplot)
+
+cordata1 #show correlation coeffiecents
+
+corrplot(cordata1)
+corrplot(cordata1,method = "ellipse")
+corrplot(cordata1,order="AOE",method="color",addCoef.col = "black")
+
+corrplot.mixed(cordata1,order="AOE")
+
+#link for more options for using corrplot
+hppts://cran.r-project.org/web/packages/corrplot/vignettes/corrplot-intro.html
