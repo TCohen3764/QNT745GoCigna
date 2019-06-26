@@ -1,0 +1,20 @@
+library('NHANES')
+library('mice')
+library('ggplot2')
+library('reshape2')
+
+data <- NHANES[c('Weight','HHIncome','SleepHrsNight','PhysActive','Gender')]
+data
+imp<-mice(data,m=10)
+impdata1<-complete(imp)
+#I used this code on each non-numeric variable to convert to numeric: 
+impdata1[,'Gender']<-as.numeric(impdata1[,'Gender'])
+impdata1[, 'PhysActive']<-as.numeric(impdata1[, 'PhysActive'])
+impdata1[, 'HHIncome']<-as.numeric(impdata1[, 'HHIncome'])
+impdata1
+#I used this code after each conversion to see that it changed to numeric: 
+#impdata1[1:5,]
+#I used this to produce the correlation of the data: 
+cordata1<-cor(impdata1)
+#show all the correlation coeffiecents
+cordata1
