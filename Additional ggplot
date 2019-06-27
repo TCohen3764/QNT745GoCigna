@@ -28,3 +28,4 @@ ggplot(data,
 + geom_bar(
 + position = "dodge")
 GGplot site that has a plethera of ggplot formulas: https://rstudio-pubs-static.s3.amazonaws.com/294957_a9f61a4e682743daa04390484e6e5a7b.html
+http://r-statistics.co/Top50-Ggplot2-Visualizations-MasterList-R-Code.html#Jitter%20Plot
