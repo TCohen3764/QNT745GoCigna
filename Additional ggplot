@@ -20,3 +20,10 @@ cordata1<-cor(impdata1)
 cordata1
 ggplot(data, aes(x = Weight, y = Gender)) + geom_point()
 ggplot(data, aes(x = Weight, fill = HHIncome)) +geom_bar(position = 'fill') + scale_fill_brewer()
+ggplot(data, aes(x = Gender, fill = HHIncome)) +
++ geom_bar(position = "fill") +
++ scale_fill_brewer()
+ggplot(data,
++ aes(x = SleepHrsNight, fill = Gender)) +
++ geom_bar(
++ position = "dodge")
